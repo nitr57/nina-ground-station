@@ -1,12 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0-windows7.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <OutputType>Library</OutputType>
     <RootNamespace>DaleGhent.NINA.GroundStation</RootNamespace>
     <AssemblyName>DaleGhent.NINA.GroundStation</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <UseWPF>true</UseWPF>
-    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <DefaultItemExcludes Condition="$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Linux)))">$(DefaultItemExcludes);**/*.xaml.cs;**/*.xaml</DefaultItemExcludes>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System.Speech" />
@@ -22,7 +21,7 @@
       <Version>3.1.2</Version>
     </PackageReference>
     <PackageReference Include="NetCoreAudio" Version="2.0.0" />
-    <PackageReference Include="NINA.Plugin" Version="3.2.0.9001" />
+    <ProjectReference Include="..\..\NINA.Plugin\NINA.Plugin.csproj" />
     <PackageReference Include="ntfy" Version="0.5.0" />
     <PackageReference Include="SlackNet" Version="0.17.5" />
     <PackageReference Include="System.Speech" Version="8.0.0">
@@ -57,7 +56,24 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="if not exist &quot;%25localappdata%25\NINA\Plugin\3.0.0\$(MSBuildProjectName)&quot; (&#xD;&#xA;    echo &quot;Creating $(PlatformName) Plugins $(MSBuildProjectName) folder&quot;&#xD;&#xA;    mkdir  &quot;%25localappdata%25\NINA\Plugins\3.0.0\$(MSBuildProjectName)&quot;&#xD;&#xA;)&#xD;&#xA;&#xD;&#xA;echo &quot;Copying artifacts&quot;&#xD;&#xA;xcopy &quot;$(TargetPath)&quot; &quot;%25localappdata%25\NINA\Plugins\3.0.0\$(MSBuildProjectName)&quot; /h/i/c/k/e/r/y&#xD;&#xA;xcopy &quot;$(TargetDir)$(TargetName).pdb&quot; &quot;%25localappdata%25\NINA\Plugins\3.0.0\$(MSBuildProjectName)&quot; /h/i/c/k/e/r/y&#xD;&#xA;xcopy &quot;$(TargetDir)runtimes\win\lib\net8.0\System.Speech.dll&quot; &quot;%25localappdata%25\NINA\Plugins\3.0.0\$(MSBuildProjectName)&quot; /h/i/c/k/e/r/y&#xD;&#xA;xcopy &quot;$(TargetDir)MailKit.dll&quot; &quot;%25localappdata%25\NINA\Plugins\3.0.0\$(MSBuildProjectName)&quot; /h/i/c/k/e/r/y&#xD;&#xA;xcopy &quot;$(TargetDir)MimeKit.dll&quot; &quot;%25localappdata%25\NINA\Plugins\3.0.0\$(MSBuildProjectName)&quot; /h/i/c/k/e/r/y&#xD;&#xA;xcopy &quot;$(TargetDir)BouncyCastle.Cryptography.dll&quot; &quot;%25localappdata%25\NINA\Plugins\3.0.0\$(MSBuildProjectName)&quot; /h/i/c/k/e/r/y&#xD;&#xA;xcopy &quot;$(TargetDir)Telegram.Bot.dll&quot; &quot;%25localappdata%25\NINA\Plugins\3.0.0\$(MSBuildProjectName)&quot; /h/i/c/k/e/r/y&#xD;&#xA;xcopy &quot;$(TargetDir)MQTTnet.dll&quot; &quot;%25localappdata%25\NINA\Plugins\3.0.0\$(MSBuildProjectName)&quot; /h/i/c/k/e/r/y&#xD;&#xA;xcopy &quot;$(TargetDir)NetCoreAudio.dll&quot; &quot;%25localappdata%25\NINA\Plugins\3.0.0\$(MSBuildProjectName)&quot; /h/i/c/k/e/r/y&#xD;&#xA;xcopy &quot;$(TargetDir)Discord.Net.Core.dll&quot; &quot;%25localappdata%25\NINA\Plugins\3.0.0\$(MSBuildProjectName)&quot; /h/i/c/k/e/r/y&#xD;&#xA;xcopy &quot;$(TargetDir)Discord.Net.Rest.dll&quot; &quot;%25localappdata%25\NINA\Plugins\3.0.0\$(MSBuildProjectName)&quot; /h/i/c/k/e/r/y&#xD;&#xA;xcopy &quot;$(TargetDir)Discord.Net.Webhook.dll&quot; &quot;%25localappdata%25\NINA\Plugins\3.0.0\$(MSBuildProjectName)&quot; /h/i/c/k/e/r/y&#xD;&#xA;xcopy &quot;$(TargetDir)SlackNet.dll&quot; &quot;%25localappdata%25\NINA\Plugins\3.0.0\$(MSBuildProjectName)&quot; /h/i/c/k/e/r/y&#xD;&#xA;xcopy &quot;$(TargetDir)ntfy.dll&quot; &quot;%25localappdata%25\NINA\Plugins\3.0.0\$(MSBuildProjectName)&quot; /h/i/c/k/e/r/y&#xD;&#xA;xcopy &quot;$(TargetDir)NetTools.dll&quot; &quot;%25localappdata%25\NINA\Plugins\3.0.0\$(MSBuildProjectName)&quot; /h/i/c/k/e/r/y&#xD;&#xA;xcopy &quot;$(TargetDir)NetTools.Crypto.dll&quot; &quot;%25localappdata%25\NINA\Plugins\3.0.0\$(MSBuildProjectName)&quot; /h/i/c/k/e/r/y&#xD;&#xA;xcopy &quot;$(TargetDir)RestSharp.dll&quot; &quot;%25localappdata%25\NINA\Plugins\3.0.0\$(MSBuildProjectName)&quot; /h/i/c/k/e/r/y&#xD;&#xA;xcopy &quot;$(TargetDir)RestSharp.Serializers.NewtonsoftJson.dll&quot; &quot;%25localappdata%25\NINA\Plugins\3.0.0\$(MSBuildProjectName)&quot; /h/i/c/k/e/r/y" />
+  <Target Name="PostBuildLinux" AfterTargets="PostBuildEvent">
+    <Exec Command="mkdir -p $HOME/.local/share/NINA/Plugins/3.0.0/GroundStation" />
+    <Exec Command="cp $(TargetPath) $HOME/.local/share/NINA/Plugins/3.0.0/GroundStation/" />
+    <Exec Command="cp $(TargetDir)System.Speech.dll $HOME/.local/share/NINA/Plugins/3.0.0/GroundStation/" />
+    <Exec Command="cp $(TargetDir)MailKit.dll $HOME/.local/share/NINA/Plugins/3.0.0/GroundStation/" />
+    <Exec Command="cp $(TargetDir)MimeKit.dll $HOME/.local/share/NINA/Plugins/3.0.0/GroundStation/" />
+    <Exec Command="cp $(TargetDir)BouncyCastle.Cryptography.dll $HOME/.local/share/NINA/Plugins/3.0.0/GroundStation/" />
+    <Exec Command="cp $(TargetDir)Telegram.Bot.dll $HOME/.local/share/NINA/Plugins/3.0.0/GroundStation/" />
+    <Exec Command="cp $(TargetDir)MQTTnet.dll $HOME/.local/share/NINA/Plugins/3.0.0/GroundStation/" />
+    <Exec Command="cp $(TargetDir)NetCoreAudio.dll $HOME/.local/share/NINA/Plugins/3.0.0/GroundStation/" />
+    <Exec Command="cp $(TargetDir)Discord.Net.Core.dll $HOME/.local/share/NINA/Plugins/3.0.0/GroundStation/" />
+    <Exec Command="cp $(TargetDir)Discord.Net.Rest.dll $HOME/.local/share/NINA/Plugins/3.0.0/GroundStation/" />
+    <Exec Command="cp $(TargetDir)Discord.Net.Webhook.dll $HOME/.local/share/NINA/Plugins/3.0.0/GroundStation/" />
+    <Exec Command="cp $(TargetDir)SlackNet.dll $HOME/.local/share/NINA/Plugins/3.0.0/GroundStation/" />
+    <Exec Command="cp $(TargetDir)ntfy.dll $HOME/.local/share/NINA/Plugins/3.0.0/GroundStation/" />
+    <Exec Command="cp $(TargetDir)NetTools.dll $HOME/.local/share/NINA/Plugins/3.0.0/GroundStation/" />
+    <Exec Command="cp $(TargetDir)NetTools.Crypto.dll $HOME/.local/share/NINA/Plugins/3.0.0/GroundStation/" />
+    <Exec Command="cp $(TargetDir)RestSharp.dll $HOME/.local/share/NINA/Plugins/3.0.0/GroundStation/" />
+    <Exec Command="cp $(TargetDir)RestSharp.Serializers.NewtonsoftJson.dll $HOME/.local/share/NINA/Plugins/3.0.0/GroundStation/" />
   </Target>
 </Project>

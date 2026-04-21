@@ -46,10 +46,7 @@ namespace DaleGhent.NINA.GroundStation.TTS {
                 return null;
             }
 
-            // Find voice matching the selected UI culture - fallback to first found voice if no match
-            var localeVoice = voices.FirstOrDefault(x => x.Culture.Name == Dispatcher.CurrentDispatcher.Thread.CurrentUICulture.Name);
-
-            return localeVoice == null ? voices.First().Name : localeVoice.Name;
+            return voices.First().Name;
         }
 
         public bool HasVoice() {
